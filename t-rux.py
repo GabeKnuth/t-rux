@@ -11,21 +11,7 @@ tape recorder and hook it up/record.
 If you don't use a tape recorder and try to play the sound directly into
 the bear (e.g. maybe you use one of those CD to Tape adapters), you will need 
 to invert the PPM signal. See the comments in GenSignal.generate for more info
-
-# short term todo 
-# 
-# - post to github when complete
-#
-# - build output file with input waveform, too. shouldn't be too hard, but there
-#   appears to be some syncing necessary when I combine the files manually. So 
-#	maybe it's not possible. 
-# 
-# - at the very least, make output.wav single channel. Doing that breaks the
-#   waveform somehow, so for now I just strip the empty channel and assemble the 
-#   new audio track in Audition. (inputfile.wav on left ch, ppm channel of 
-#   outputfile.wav on the right).
 '''
-
 
 # Amplitude code derived from:
 # http://myinspirationinformation.com/uncategorized/audio-signals-in-python/
@@ -338,10 +324,3 @@ class PPM:
 gen = GenSignal()
 
 app = PPM()
-
-
-
-
-
-
-
