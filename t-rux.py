@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 '''
 USAGE:
 python3 t-rux.py inputfile.wav outputfile.wav
@@ -72,13 +73,13 @@ if rate < 192000:
 #determine length of wav file
 wav_duration = audData.shape[0] / rate
 
-# create a time array in .0225 increments. We'll take a sample
-# at each time
-time = np.arange(0, wav_duration, PPM_FRAME_WIDTH)
+# create a time array in PPM_FRAME_WIDTH increments. We'll take a sample
+# at each time.
+sample_times = np.arange(0, wav_duration, PPM_FRAME_WIDTH)
 
 # determines number of wav samples to skip between amplitude measurements
 # sample_step needs to be int, so that's what // does. That was new to me.
-sample_step = audData.shape[0] // len(time) 
+sample_step = audData.shape[0] // len(sample_times) 
 #print(sample_step)
 
 # defines the sample in audData to start at. Will incremement in loop
@@ -94,7 +95,7 @@ next_sample = 0
 
 
 #for i in range (1,(len(time))):
-for i in time:
+for i in sample_times:
 	# gets amplitude data
 	blockRMS = np.sqrt(audData[next_sample]**2) 
 	#print(blockRMS)
@@ -112,10 +113,10 @@ for i in time:
 # Example if the GROUP_SIZE is set to 5 (above in constants):
 
 # sample_list might look like: [1, 6, 8, 7, 2, 150, 101, 5, 250, 19, ..., 50, 49, 48, 65, 37] 
-# 		                        |-----*-----|  |------------***---|	      |-----------**---|
+#                               |-----*-----|  |------------***---|       |-----------**---|
 
 # after this, it will look like: [8, 8, 8, 8, 8, 250, 250, 250, 250, 250, ..., 65, 65, 65, 65, 65]
-# 					              |-----------|  |---------------------|       |----------------|
+#                                 |-----------|  |---------------------|       |----------------|
 
 x = 0
 
@@ -229,7 +230,6 @@ for width in range(len(channel_width_list)):
 
 # Original project: https://github.com/kangsterizer/Audio_PPM_Linux
 
-#!/usr/bin/python
 # Licensed under the terms of the GPLv3
 # Copyright 2010 kang@insecure.ws
 # See http://www.gnu.org/licenses/gpl-3.0.txt or the LICENSE file
